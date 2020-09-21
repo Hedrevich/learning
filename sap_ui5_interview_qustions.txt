@@ -1,0 +1,237 @@
+1)class
+
+Класс зачастую описывает объект реального мира. Как и реальный объект, класс содержит свой набор параметров и характеристик. Каждый такой параметр называется поле класса (очень похоже на обычные переменные). Также класс способен манипулировать своими характеристиками (полями) с помощью методов класса (похожи на функции в процедурных языках).
+
+
+Класс – это способ описания сущности, определяющий состояние и поведение, зависящее от этого состояния, а также правила для взаимодействия с данной сущностью (контракт).
+
+Интерфейс – это набор методов класса, доступных для использования другими классами.
+
+2)object
+
+Объект (экземпляр) – это отдельный представитель класса, имеющий конкретное состояние и поведение, полностью определяемое классом.
+
+3)patterns
+
+module(can be reused)
+
+Паттерн «Синглтон» или «Одиночка» (Singleton) представляет собой объект, который может существовать лишь в единственном экземпляре.
+
+let instance = null;
+function User(name, age) {
+  if(instance) {
+    return instance;
+  }
+  instance = this;
+  this.name = name;
+  this.age = age;
+  
+  return instance;
+}
+
+4)mvc
+
+model view controller
+
+5)factory
+
+Этот паттерн используется для создания объектов в случаях, когда не нужно делать общедоступной логику их создания. Паттерн «Фабрика» может быть использован в том случае, если нужно создавать различные объекты в зависимости от специфических условий. Например:
+
+class Car{
+  constructor(options) {
+    this.doors = options.doors || 4;
+    this.state = options.state || 'brand new';
+    this.color = options.color || 'white';
+  }
+}
+class Truck {
+  constructor(options) {
+    this.doors = options.doors || 4;
+    this.state = options.state || 'used';
+    this.color = options.color || 'black';
+  }
+}
+class VehicleFactory {
+  createVehicle(options) {
+    if(options.vehicleType === 'car') {
+      return new Car(options);
+    } else if(options.vehicleType === 'truck') {
+      return new Truck(options);
+      }
+  }
+}
+
+6)builder
+
+ Паттерн СТРОИТЕЛЬ - это порождающий паттерн проектирования, который позволяет создавать сложные объекты пошагово.
+ * Строитель даёт возможность использовать один и тот же код строительства для получения разных представлений объектов.
+ * Применение: Паттерн Строитель нужен, если объект может существовать в разных вариациях или процесс
+ * инстанцирования состоит из нескольких шагов.
+ * В этом случае есть три варианта:
+ * - огромный конструктор(фабрика) со множеством if/else в котором легко запуться и который тяжело понять
+ * - плодить кучу подклассов для всех вариантов (это наверное еще хуже первого варианта)
+ * - паттерн строитель (предлагает разбить процесс конструирования объекта на отдельные шаги (например, построитьСтены,
+ * вставитьДвери и другие). Чтобы создать объект, вам нужно поочерёдно вызывать методы строителя. Строителей может быть
+ * несколько разных вариантов, но у них общий интерфейс.)
+
+	
+7)sap.ui.core.UIComponent.prototype.init.apply(this, arguments);
+
+Our component inherits from the base class sap.ui.core.UIComponent and it is obligatory to make the super call to the init function of the base class in the overridden init method.
+
+Function.prototype.apply(thisArg [, argsArray])
+Calls a function and sets its this to the provided thisArg. Arguments can be passed as an Array object.
+
+
+
+8)apply.call
+
+Function.prototype.apply(thisArg [, argsArray])
+Calls a function and sets its this to the provided thisArg. Arguments can be passed as an Array object.
+
+Function.prototype.call(thisArg[, arg1, arg2, ...argN])
+Calls a function and sets its this to the provided value. Arguments can be passed as they are.
+
+
+9)prototype
+
+__proto__ is the actual object that is used in the lookup chain to resolve methods, etc. prototype is the object that is used to build __proto__ when you create an object with new:
+
+
+prototype is a property of a Function object. It is the prototype of objects constructed by that function.
+__proto__ is internal property of an object, pointing to its prototype
+
+
+JavaScript часто описывают как язык прототипного наследования — каждый объект, имеет объект-прототип, который выступает как шаблон, от которого объект наследует методы и свойства. Объект-прототип так же может иметь свой прототип и наследовать его свойства и методы и так далее. Это часто называется цепочкой прототипов и объясняет почему одним объектам доступны свойства и методы которые определены в других объектах.
+
+Точнее, свойства и методы определяются в свойстве prototype функции-конструктора объектов, а не в самих объектах.
+
+В JavaScript создается связь между экземпляром объекта и его прототипом (свойство __proto__, которое является производным от свойства prototype конструктора), а свойства и методы обнаруживаются при переходе по цепочке прототипов.
+
+10)types(int)
+
+null.
+undefined.
+boolean.
+string.
+number.
+object.
+symbol (добавлен в ES6)
+
+11)bootstrapping
+
+You can use the SAPUI5 bootstrap script in your page to initialize SAPUI5 runtime automatically as soon as the script is loaded and executed by the browser. For simple use cases as well as the default SAPUI5 installation, this is sufficient to build and run UIs. In addition to this, you can specify the set of SAPUI5 libraries and the theme used for your application in the configuration settings.
+
+
+<script id="sap-ui-bootstrap" 
+     type="text/javascript"
+     src="resources/sap-ui-core.js"
+     data-sap-ui-theme="sap_belize"
+     data-sap-ui-libs="sap.m"
+     data-sap-ui-compatVersion="edge">
+</script>
+
+<script 
+    id="sap-ui-bootstrap"            
+    src="resources/sap-ui-core.js" 
+    data-sap-ui-libs="sap.ui.m"
+    data-sap-ui-bindingSyntax="complex"
+    data-sap-ui-theme="sap_bluecrystal" 
+    data-sap-ui-preload="async" >
+</script>
+
+12)component.preload
+
+The library preload file library-preload.js contains all modules of a certain library. These modules will only be executed on demand, if the application requires them. Using preloads significantly reduces the number of roundtrips since the single modules are bundled in one file
+
+grunt
+
+
+13)base controller
+
+        "sap/ui/core/mvc/Controller",
+ 	return Controller.extend("sap.cim.invoice.list.controller.BaseController", 
+
+
+14)fragment
+
+...
+
+
+15)expression binding
+
+Expression binding is an enhancement of the SAPUI5 binding syntax, which allows for providing expressions instead of custom formatter functions.
+
+This saves the overhead of defining a function and is recommended in cases where the formatter function has a trivial implementation like comparison of values.
+
+{=expression} in an XML view.
+
+With these, you can use members and member methods on standard types such as String: {=${/firstName}.length}, for example ${/firstName}.indexOf('S').
+
+16)binding(relative/absolute)
+
+
+Binding paths address the different properties and lists in a model and define how a node in the hierarchical data tree can be found.
+
+A binding path consists of a number of name tokens, which are separated by a separator char. In all models provided by the framework, the separator char is the slash "/".
+
+A binding path can either be absolute or relative: Absolute binding paths start with a slash, relative binding paths start with a name token and are resolved relative to the context of the control that is bound. A context exists either for each entry of the aggregation in case of aggregation binding or can be set explicitly for a control by using the setBindingContext method.
+
+When you use multiple models, specify the model name within the binding path to address the correct model. The same applies for setting a binding context for such a model. The binding path must start with the model name followed by a '>' as shown in the following example for setting a binding context.
+
+17)dont refresh bindgin
+
+
+18)GET/POST
+
+GET
+Метод GET запрашивает представление ресурса. Запросы с использованием этого метода могут только извлекать данные.
+
+HEAD
+HEAD запрашивает ресурс так же, как и метод GET, но без тела ответа.
+
+POST
+POST используется для отправки сущностей к определённому ресурсу. Часто вызывает изменение состояния или какие-то побочные эффекты на сервере.
+
+PUT
+PUT заменяет все текущие представления ресурса данными запроса.
+
+DELETE
+DELETE удаляет указанный ресурс.
+
+CONNECT
+CONNECT устанавливает "туннель" к серверу, определённому по ресурсу.
+
+OPTIONS
+OPTIONS используется для описания параметров соединения с ресурсом.
+
+TRACE
+TRACE выполняет вызов возвращаемого тестового сообщения с ресурса.
+
+PATCH
+PATCH используется для частичного изменения ресурса.
+
+xsrf token
+
+18)cross-origin
+
+Cross-Origin Resource Sharing (CORS) — механизм, использующий дополнительные HTTP-заголовки, чтобы дать возможность агенту пользователя получать разрешения на доступ к выбранным ресурсам с сервера на источнике (домене), отличном от того, что сайт использует в данный момент. Говорят, что агент пользователя делает запрос с другого источника (cross-origin HTTP request), если источник текущего документа отличается от запрашиваемого ресурса доменом, протоколом или портом.
+
+access-control-alow-origin/method
+
+19)session
+20)css selector
+
+Selector	Example	Example description
+.class	.intro	Selects all elements with class="intro"
+#id	#firstname	Selects the element with id="firstname"
+*	*	Selects all elements
+element	p	Selects all <p> elements
+element,element,..	div, p	Selects all <div> elements and all <p> elements
+
+21)nth-child 
+/* Selects the second <li> element in a list */
+li:nth-child(2) { 
+  color: lime;
+}
+
