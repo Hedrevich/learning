@@ -1,4 +1,4 @@
-# NPM
+# GIT
 
 ## CLRF --> LF after `git add .`
 - If you already have checked out the code, the files are already indexed. After changing your git settings, say by running:
